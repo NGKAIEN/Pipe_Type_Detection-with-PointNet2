@@ -7,10 +7,12 @@ conda install pytorch==1.6.0 cudatoolkit=10.1 -c pytorch
 
 ## Classification 
 ### Data Preparation
-Data preprocess using ply2txt.py
+Data preprocessing using ply2txt.py
+Original data captured by the camera in .ply format, it contains 6 elements (x,y,z,r,g,b) and header information. If we want to use pointnet to train model, the file formats need to convert to .txt format, which is only 3 elements we need to remain (x,y,z coordinate).
+
 ### Run
-You can run different modes with the following codes. The num. of category is modified to 3.
-* If you want to train on ModelNet10, you can use `--num_category 10`.
+You can run different modes with the following codes. The number. of categories is modified to 3.
+
 ```shell
 
 # ModelNet40
@@ -27,6 +29,13 @@ python test_classification.py --log_dir pointnet2_cls_ssg
 python train_classification.py --model pointnet2_cls_msg --log_dir pointnet2_cls_msg --num_category 3
 python test_classification.py --log_dir pointnet2_cls_msg
 
+```
+### Testing Model Accuracy Using Random Data
+Using test_visualizer.py can use the trained model to test random pipe point cloud data that is put inside a specific path. This function can be a base for building a real-time pipe-type detection function.
+
+We can using this file as a function :
+``` shell
+python test_visualizer.py --logdir pointnet2_cls_msg 
 ```
 
 ### Performance
